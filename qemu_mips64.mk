@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 The Android Open-Source Project
+# Copyright 2014 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,16 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+PRODUCT_COPY_FILES += \
+    prebuilts/qemu-kernel/mips64/3.18/kernel-qemu2:kernel-ranchu
 
-# The following products should be used to generate a minimal system image
-# to be run under upstream QEMU (with a few Android-related patches). Note
-# that this is different from running them under the Android emulator.
+$(call inherit-product, $(LOCAL_PATH)/qemu_base.mk)
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/qemu_arm.mk \
-    $(LOCAL_DIR)/qemu_x86.mk \
-    $(LOCAL_DIR)/qemu_mips.mk \
-    $(LOCAL_DIR)/qemu_x86_64.mk \
-    $(LOCAL_DIR)/qemu_arm64.mk \
-    $(LOCAL_DIR)/qemu_mips64.mk \
-    $(LOCAL_DIR)/ranchu_arm64.mk \
+# Overrides
+PRODUCT_BRAND := generic_mips64
+PRODUCT_NAME := qemu_mips64
+PRODUCT_DEVICE = generic_mips64
+PRODUCT_MODEL := Minimal Android for QEMU/MIPS64
+
+TARGET_SUPPORTS_32_BIT_APPS := true
+TARGET_SUPPORTS_64_BIT_APPS := true
